@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "dads-joke-1eebf"
+  },
+  "targets": {
+    "dads-joke-1eebf": {
+      "hosting": {
+        "app": [
+          "dads-joke-1eebf"
+        ]
+      }
+    }
+  }
+}

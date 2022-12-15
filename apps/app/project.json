@@ -21,13 +21,16 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/app/src/favicon.ico",
-          "apps/app/src/assets"
+          "apps/app/src/assets",
+          "apps/app/src/manifest.webmanifest"
         ],
         "styles": [
           "@angular/material/prebuilt-themes/deeppurple-amber.css",
           "apps/app/src/styles.scss"
         ],
-        "scripts": []
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/app/ngsw-config.json"
       },
       "configurations": {
         "production": {
@@ -94,6 +97,16 @@
       "options": {
         "jestConfig": "apps/app/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "deploy": {
+      "executor": "@angular/fire:deploy",
+      "options": {
+        "prerender": false,
+        "ssr": false,
+        "browserTarget": "app:build:production",
+        "firebaseProject": "dads-joke-1eebf",
+        "firebaseHostingSite": "dads-joke-1eebf"
       }
     }
   },

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JokeDetailComponent } from './joke-detail/joke-detail.component';
 import { Joke } from '../model/joke';
 import { JokesService } from './jokes.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-jokes-page',
@@ -11,13 +12,23 @@ import { JokesService } from './jokes.service';
   templateUrl: './jokes-page.component.html',
   styleUrls: ['./jokes-page.component.scss'],
 })
-export class JokesPageComponent {
+export class JokesPageComponent implements OnDestroy {
   jokes: Joke[] = [];
 
+  private unsubscribe$ = new Subject<void>();
+
   constructor(private readonly jokesServices: JokesService) {
-    jokesServices.getJokes().subscribe((jokes) => {
-      this.jokes = jokes;
-    });
+    jokesServices
+      .getJokes()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((jokes) => {
+        this.jokes = jokes;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   setFavoriteJoke(joke: Joke) {

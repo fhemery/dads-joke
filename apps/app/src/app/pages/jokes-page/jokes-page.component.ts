@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { JokePageModel } from './model/joke-page-model';
 import { JokesPageHeaderComponent } from './jokes-page-header/jokes-page-header.component';
 import { JokesListComponent } from './jokes-list/jokes-list.component';
+import { JokesFavoriteComponent } from './jokes-favorite/jokes-favorite.component';
 
 @Component({
   selector: 'app-jokes-page',
@@ -16,6 +17,7 @@ import { JokesListComponent } from './jokes-list/jokes-list.component';
     JokeDetailComponent,
     JokesPageHeaderComponent,
     JokesListComponent,
+    JokesFavoriteComponent,
   ],
   templateUrl: './jokes-page.component.html',
   styleUrls: ['./jokes-page.component.scss'],

@@ -3,8 +3,6 @@
 
   <app-jokes-list (favorite)="setFavoriteJoke($event)" [jokes]="model.jokes"></app-jokes-list>
 
-  <div *ngIf="favoriteJoke">
-    <h2>Your favorite joke</h2>
-    <div>{{favoriteJoke}}</div>
-  </div>
+  <app-jokes-favorite [favorite]="favoriteJoke"></app-jokes-favorite>
+
 </div>

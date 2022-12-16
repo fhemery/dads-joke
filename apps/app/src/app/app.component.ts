@@ -20,9 +20,6 @@ import { JokesPageComponent } from './pages/jokes-page/jokes-page.component';
 })
 export class AppComponent {
   title = 'app';
+  version = '1.2.4';
   @HostBinding('class') class = 'app';
-
-  getVersion() {
-    return '1.2.4';
-  }
 }

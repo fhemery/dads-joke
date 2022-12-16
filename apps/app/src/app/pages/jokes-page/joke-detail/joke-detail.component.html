@@ -1,1 +1,5 @@
-<div class="joke-detail"> {{joke}} <mat-icon (click)="setFavorite()">favorite</mat-icon> </div>
+<div class="joke-detail" *ngIf="joke">
+  <div>{{joke.pun}}</div>
+  <mat-icon (click)="setUnfavorite()" *ngIf="joke.isFavorite">favorite</mat-icon>
+  <mat-icon (click)="setFavorite()" *ngIf="!joke.isFavorite">favorite_outline</mat-icon>
+</div>

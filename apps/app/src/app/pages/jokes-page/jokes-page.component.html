@@ -1,11 +1,10 @@
-<h2>Jokes</h2>
+<div *ngIf="model$ | async; let model">
+  <app-jokes-page-header [total]="model.total"></app-jokes-page-header>
 
-<div *ngIf="jokes$ | async; let jokes">
-  <app-joke-detail (isFavorite)="setFavoriteJoke($event)" [joke]="joke" *ngFor="let joke of jokes"></app-joke-detail>
-  Debug : {{ jokes | json}}
-</div>
+  <app-jokes-list (favorite)="setFavoriteJoke($event)" [jokes]="model.jokes"></app-jokes-list>
 
-<div *ngIf="favoriteJoke">
-  <h2>Your favorite joke</h2>
-  <div>{{favoriteJoke}}</div>
+  <div *ngIf="favoriteJoke">
+    <h2>Your favorite joke</h2>
+    <div>{{favoriteJoke}}</div>
+  </div>
 </div>

@@ -14,6 +14,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class JokesPageComponent implements OnDestroy {
   jokes$: Observable<Joke[]>;
+  favoriteJoke = '';
 
   private unsubscribe$ = new Subject<void>();
 
@@ -28,14 +29,6 @@ export class JokesPageComponent implements OnDestroy {
 
   setFavoriteJoke(joke: Joke) {
     console.log('isFavorite called with', joke);
-    /*this.jokes = this.jokes.map((j) =>
-      j.id === joke.id ? { ...j, isFavorite: true } : j
-    );*/
-  }
-
-  setUnfavoriteJoke($event: Joke) {
-    /*this.jokes = this.jokes.map((j) =>
-      j.id === $event.id ? { ...j, isFavorite: false } : j
-    );*/
+    this.favoriteJoke = joke.pun;
   }
 }

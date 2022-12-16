@@ -13,15 +13,9 @@ import { Joke } from '../../model/joke';
 export class JokeDetailComponent {
   @Input() joke: Joke | null = null;
   @Output() isFavorite = new EventEmitter<Joke>();
-  @Output() isUnfavorite = new EventEmitter<Joke>();
 
   setFavorite() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.isFavorite.emit(this.joke!);
-  }
-
-  setUnfavorite() {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.isUnfavorite.emit(this.joke!);
   }
 }

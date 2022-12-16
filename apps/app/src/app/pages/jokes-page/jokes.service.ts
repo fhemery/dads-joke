@@ -28,7 +28,6 @@ export class JokesService {
           response.results.map((j) => ({
             id: j.id,
             pun: j.joke,
-            isFavorite: false,
           }))
         )
       );

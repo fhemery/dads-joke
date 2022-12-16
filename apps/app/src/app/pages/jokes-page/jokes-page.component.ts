@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JokeDetailComponent } from './joke-detail/joke-detail.component';
 import { Joke } from '../model/joke';
+import { JokesService } from './jokes.service';
 
 @Component({
   selector: 'app-jokes-page',
@@ -11,18 +12,13 @@ import { Joke } from '../model/joke';
   styleUrls: ['./jokes-page.component.scss'],
 })
 export class JokesPageComponent {
-  jokes: Joke[] = [
-    {
-      id: '1',
-      pun: 'Que fait une fraise sur un cheval ? Tagada !',
-      isFavorite: false,
-    },
-    {
-      id: '2',
-      pun: `C'est un type qui rentre dans un café... et plouf.`,
-      isFavorite: false,
-    },
-  ];
+  jokes: Joke[] = [];
+
+  constructor(private readonly jokesServices: JokesService) {
+    jokesServices.getJokes().subscribe((jokes) => {
+      this.jokes = jokes;
+    });
+  }
 
   setFavoriteJoke(joke: Joke) {
     console.log('isFavorite called with', joke);

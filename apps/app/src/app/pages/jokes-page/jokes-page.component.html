@@ -1,5 +1,6 @@
 <h2>Jokes</h2>
 
-<app-joke-detail (isFavorite)="setFavoriteJoke($event)" (isUnfavorite)="setUnfavoriteJoke($event)" [joke]="joke" *ngFor="let joke of jokes"></app-joke-detail>
-
-Debug : {{ jokes | json}}
+<div *ngIf="jokes$ | async; let jokes">
+  <app-joke-detail (isFavorite)="setFavoriteJoke($event)" (isUnfavorite)="setUnfavoriteJoke($event)" [joke]="joke" *ngFor="let joke of jokes"></app-joke-detail>
+  Debug : {{ jokes | json}}
+</div>

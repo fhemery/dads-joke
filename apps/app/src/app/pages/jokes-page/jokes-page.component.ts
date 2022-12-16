@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { JokeDetailComponent } from './joke-detail/joke-detail.component';
 import { Joke } from '../model/joke';
 import { JokesService } from './jokes.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-jokes-page',
@@ -13,17 +13,12 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./jokes-page.component.scss'],
 })
 export class JokesPageComponent implements OnDestroy {
-  jokes: Joke[] = [];
+  jokes$: Observable<Joke[]>;
 
   private unsubscribe$ = new Subject<void>();
 
   constructor(private readonly jokesServices: JokesService) {
-    jokesServices
-      .getJokes()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((jokes) => {
-        this.jokes = jokes;
-      });
+    this.jokes$ = jokesServices.getJokes();
   }
 
   ngOnDestroy(): void {
@@ -33,14 +28,14 @@ export class JokesPageComponent implements OnDestroy {
 
   setFavoriteJoke(joke: Joke) {
     console.log('isFavorite called with', joke);
-    this.jokes = this.jokes.map((j) =>
+    /*this.jokes = this.jokes.map((j) =>
       j.id === joke.id ? { ...j, isFavorite: true } : j
-    );
+    );*/
   }
 
   setUnfavoriteJoke($event: Joke) {
-    this.jokes = this.jokes.map((j) =>
+    /*this.jokes = this.jokes.map((j) =>
       j.id === $event.id ? { ...j, isFavorite: false } : j
-    );
+    );*/
   }
 }

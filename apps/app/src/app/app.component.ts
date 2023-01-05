@@ -31,6 +31,6 @@ export class AppComponent {
     translate.setTranslation('fr', fr);
     translate.setDefaultLang('en'); // Fallback
 
-    translate.use('fr');
+    translate.use('en');
   }
 }

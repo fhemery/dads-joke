@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -37,11 +38,13 @@ export class LoginPageComponent {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly auth: AuthService
   ) {}
 
   doLogin() {
-    console.log(this.loginForm.value);
+    const { login, password } = this.loginForm.value;
+    this.auth.signIn(login || '', password || '');
   }
 
   getLoginLabel(): string {

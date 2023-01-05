@@ -14,6 +14,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideHttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -21,6 +22,7 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     importProvidersFrom(
       BrowserAnimationsModule,
+      TranslateModule.forRoot(),
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: !isDevMode(),
         // Register the ServiceWorker as soon as the application is stable

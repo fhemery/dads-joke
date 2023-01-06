@@ -14,8 +14,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideHttpClient } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -32,9 +31,7 @@ bootstrapApplication(AppComponent, {
       }),
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideAuth(() => getAuth()),
-      //provideFirestore(() => getFirestore()),
-      AngularFireModule.initializeApp(environment.firebase),
-      AngularFirestoreModule,
+      provideFirestore(() => getFirestore()),
       provideStorage(() => getStorage())
     ),
   ],

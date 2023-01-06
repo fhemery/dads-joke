@@ -1,35 +1,40 @@
 import { Injectable } from '@angular/core';
 import { from, map, Observable, switchMap, take } from 'rxjs';
 import { Joke } from '../model/joke';
-
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from '../../services/auth.service';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  Firestore,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesService {
   constructor(
-    private readonly firestore: AngularFirestore,
-    private readonly auth: AuthService
+    private readonly auth: AuthService,
+    private readonly firestore: Firestore
   ) {}
 
   getFavorites(userId: string): Observable<Joke[]> {
-    return this.firestore
-      .collection<Joke>(`favorites/${userId}/jokes`)
-      .valueChanges()
-      .pipe(map((j) => j || []));
+    const favorites = collection(this.firestore, `favorites/${userId}/jokes`);
+    return collectionData(favorites, {
+      idField: 'id',
+    }) as Observable<Joke[]>;
   }
 
   addJoke(joke: Joke): void {
     this.auth.user$
       .pipe(
         map((u) => u?.uid || ''),
-        switchMap((uid) => {
-          if (!uid) throw Error('Not logged');
-          return from(
-            this.firestore.collection<Joke>(`favorites/${uid}/jokes`).add(joke)
+        switchMap((userId) => {
+          const favorites = collection(
+            this.firestore,
+            `favorites/${userId}/jokes`
           );
+          return from(addDoc(favorites, joke));
         }),
         take(1)
       )

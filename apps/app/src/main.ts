@@ -11,10 +11,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from './environments/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideHttpClient } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -31,7 +32,9 @@ bootstrapApplication(AppComponent, {
       }),
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideAuth(() => getAuth()),
-      provideFirestore(() => getFirestore()),
+      //provideFirestore(() => getFirestore()),
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFirestoreModule,
       provideStorage(() => getStorage())
     ),
   ],

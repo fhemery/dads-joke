@@ -4,6 +4,7 @@ import {
   authState,
   signInWithEmailAndPassword,
   signOut,
+  User,
 } from '@angular/fire/auth';
 import { catchError, from, map, NEVER, Observable, take, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -16,6 +17,7 @@ export class AuthService {
     tap(console.log),
     map((user) => !!user)
   );
+  user$: Observable<User | null> = authState(this.auth);
   constructor(private readonly auth: Auth, private router: Router) {}
 
   signIn(email: string, password: string) {

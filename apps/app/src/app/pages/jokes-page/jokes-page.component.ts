@@ -8,6 +8,7 @@ import { JokePageModel } from './model/joke-page-model';
 import { JokesPageHeaderComponent } from './jokes-page-header/jokes-page-header.component';
 import { JokesListComponent } from './jokes-list/jokes-list.component';
 import { JokesFavoriteComponent } from './jokes-favorite/jokes-favorite.component';
+import { FavoritesService } from '../favorites-page/favorites.service';
 
 @Component({
   selector: 'app-jokes-page',
@@ -26,12 +27,16 @@ export class JokesPageComponent {
   model$: Observable<JokePageModel>;
   favoriteJoke = '';
 
-  constructor(private readonly jokesServices: JokesService) {
+  constructor(
+    private readonly jokesServices: JokesService,
+    private readonly favoritesService: FavoritesService
+  ) {
     this.model$ = jokesServices.getJokesWithTotal();
   }
 
   setFavoriteJoke(joke: Joke) {
     console.log('isFavorite called with', joke);
+    this.favoritesService.addJoke(joke);
     this.favoriteJoke = joke.pun;
   }
 }

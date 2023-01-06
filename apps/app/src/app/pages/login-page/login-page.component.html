@@ -8,7 +8,7 @@
           <div>
             <mat-form-field>
               <mat-label>{{'login.form.loginLabel' | translate}}</mat-label>
-              <input matInput formControlName="login">
+              <input name="login" matInput formControlName="login">
               <mat-error *ngIf="login?.errors?.['email']">Login must be an email</mat-error>
               <mat-error *ngIf="login?.errors?.['required']">Login is required</mat-error>
             </mat-form-field>
@@ -16,12 +16,12 @@
           <div>
             <mat-form-field>
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password">
+              <input matInput name="password" type="password" formControlName="password">
               <mat-error>Password is required</mat-error>
             </mat-form-field>
           </div>
           <div>
-            <button mat-raised-button color="primary" type="submit"
+            <button id="login-btn" mat-raised-button color="primary" type="submit"
                     [disabled]="!loginForm.valid">Login</button>
           </div>
         </form>

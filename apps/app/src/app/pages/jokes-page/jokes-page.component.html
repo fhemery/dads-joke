@@ -1,7 +1,8 @@
 <div *ngIf="model$ | async; let model">
   <app-jokes-page-header [total]="model.total"></app-jokes-page-header>
 
-  <app-jokes-list (favorite)="setFavoriteJoke($event)" [jokes]="model.jokes"></app-jokes-list>
+  <app-jokes-list *ngIf="model.jokes.length" (favorite)="setFavoriteJoke($event)" [jokes]="model.jokes"></app-jokes-list>
+  <div *ngIf="!model.jokes.length" class="no-joke">Oh no!</div>
 
   <app-jokes-favorite [favorite]="favoriteJoke"></app-jokes-favorite>
 

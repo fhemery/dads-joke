@@ -7,7 +7,8 @@
     "postinstall": "node ./decorate-angular-cli.js",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "cy:open": "cypress open -P apps/app-e2e -c baseUrl=http://localhost:4200"
   },
   "private": true,
   "dependencies": {

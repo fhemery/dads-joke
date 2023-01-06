@@ -1,13 +1,45 @@
-import { getGreeting } from '../support/app.po';
+import { HomePo } from '../support/app.po';
+import { LoginPo } from '../support/login.po';
 
 describe('app', () => {
-  beforeEach(() => cy.visit('/'));
+  let homePage: HomePo;
+  let loginPage: LoginPo;
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  beforeEach(() => {
+    homePage = new HomePo();
+    loginPage = new LoginPo();
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome app');
+  afterEach(() => {
+    homePage.logoutIfNeeded();
+  });
+
+  it('should display default page correctly', () => {
+    homePage.goTo();
+
+    homePage.shouldHaveJokeHeader();
+  });
+
+  describe('when there are no jokes', function () {
+    it('should display no joke in a card', function () {
+      homePage.setApiToReturnNoJokes();
+
+      homePage.goTo();
+
+      homePage.shouldDisplayNoJokeCard();
+    });
+  });
+
+  describe('login', () => {
+    it('should work with an account that exists', () => {
+      homePage.setApiToReturnNoJokes();
+
+      homePage.clickLoginButton();
+      loginPage.shouldBeDisplayed();
+
+      loginPage.authenticate('fred@test.fr', 'Test123');
+
+      homePage.shouldNotHaveLoginButton();
+    });
   });
 });

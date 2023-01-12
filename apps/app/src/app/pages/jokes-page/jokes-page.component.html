@@ -4,6 +4,9 @@
   <app-jokes-list *ngIf="model.jokes.length" (favorite)="setFavoriteJoke($event)" [jokes]="model.jokes"></app-jokes-list>
   <div *ngIf="!model.jokes.length" class="no-joke">Oh no!</div>
 
-  <app-jokes-favorite [favorite]="favoriteJoke"></app-jokes-favorite>
+  <div *ngIf="favoriteJoke" id="favorite-joke">
+    <app-jokes-favorite [favorite]="favoriteJoke"></app-jokes-favorite>
+  </div>
+  dasdasd
 
 </div>

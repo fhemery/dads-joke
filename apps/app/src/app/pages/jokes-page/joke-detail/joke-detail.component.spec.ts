@@ -1,23 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { JokeDetailComponent } from './joke-detail.component';
+import { take } from 'rxjs';
 
 describe('JokeDetailComponent', () => {
   let component: JokeDetailComponent;
-  let fixture: ComponentFixture<JokeDetailComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ JokeDetailComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(JokeDetailComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  /* Here we test the component Typescript part only */
+  beforeEach(() => {
+    component = new JokeDetailComponent();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('setFavorite', function () {
+    it('should emit the joke when called', function (done) {
+      // ARRANGE
+      component.joke = { id: '1', pun: 'Que fait une fraise...' };
+
+      // ASSERT
+      component.isFavorite.pipe(take(1)).subscribe((result) => {
+        expect(result.id).toBe('1');
+        done();
+      });
+
+      // ACT
+      component.setFavorite();
+    });
   });
 });

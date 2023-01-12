@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JokesPageComponent should match snapshot 1`] = `
+<app-jokes-page
+  __ngContext__="0"
+  favoriteJoke={[Function String]}
+  favoritesService={[Function Object]}
+  jokesServices={[Function Object]}
+  model$={[Function Observable]}
+>
+  <div>
+    <app-jokes-page-header>
+      <h2>
+         Random Jokes (20 / 45)
+      </h2>
+    </app-jokes-page-header>
+    <div
+      class="no-joke"
+    >
+      Oh no!
+    </div>
+    <div
+      id="favorite-joke"
+    >
+      <app-jokes-favorite>
+        <div>
+          <h2>
+            Your favorite joke
+          </h2>
+          <div>
+            Que fait une fraise...
+          </div>
+        </div>
+      </app-jokes-favorite>
+    </div>
+  </div>
+</app-jokes-page>
+`;

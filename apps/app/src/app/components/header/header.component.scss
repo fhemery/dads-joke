@@ -8,4 +8,12 @@
   .title {
     cursor: pointer;
   }
+
+  .logged-in-bar {
+    display: flex;
+
+    div {
+      margin-right: 1rem;
+    }
+  }
 }

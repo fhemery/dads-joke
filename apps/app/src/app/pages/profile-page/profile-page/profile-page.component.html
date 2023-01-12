@@ -1,4 +1,4 @@
 <h2> Profile</h2>
-<div *ngIf="profile">
+<div *ngIf="profile$ | async; let profile">
   <div>Name: {{profile.name}}</div>
 </div>

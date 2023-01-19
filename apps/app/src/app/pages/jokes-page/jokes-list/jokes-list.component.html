@@ -1,1 +1,1 @@
-<app-joke-detail (isFavorite)="setFavoriteJoke($event)" [joke]="joke" *ngFor="let joke of jokes"></app-joke-detail>
+<app-joke-detail (isFavorite)="setFavoriteJoke($event)" [joke]="joke" *ngFor="let joke of jokes; trackBy: trackJokeId"></app-joke-detail>

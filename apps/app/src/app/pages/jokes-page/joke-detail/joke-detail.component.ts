@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Joke } from '../../model/joke';
@@ -9,6 +15,7 @@ import { Joke } from '../../model/joke';
   imports: [CommonModule, MatIconModule],
   templateUrl: './joke-detail.component.html',
   styleUrls: ['./joke-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JokeDetailComponent {
   @Input() joke: Joke | null = null;
@@ -17,5 +24,10 @@ export class JokeDetailComponent {
   setFavorite() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.isFavorite.emit(this.joke!);
+  }
+
+  getPun() {
+    console.log(`Called getPun`);
+    return this.joke?.pun;
   }
 }

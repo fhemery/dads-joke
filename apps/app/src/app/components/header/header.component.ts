@@ -4,7 +4,8 @@ import { Router, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs';
+import { catchError, NEVER, Observable } from 'rxjs';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +16,11 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent {
   isLoggedIn$: Observable<boolean> = this.auth.isLoggedIn$;
+  key = '';
   constructor(
     private readonly router: Router,
-    private readonly auth: AuthService
+    private readonly auth: AuthService,
+    private readonly afMessaging: AngularFireMessaging
   ) {}
 
   goToLogin() {
@@ -26,5 +29,24 @@ export class HeaderComponent {
 
   logout() {
     this.auth.signOut();
+  }
+
+  enableNotification() {
+    this.afMessaging.requestToken // getting tokens
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return NEVER;
+        })
+      )
+      .subscribe((token) => {
+        // USER-REQUESTED-TOKEN
+        if (token) {
+          console.log('Permission granted! Save to the server!', token);
+          this.key = token || '';
+        } else {
+          console.error('User rejected the notification');
+        }
+      });
   }
 }

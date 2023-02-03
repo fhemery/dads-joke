@@ -22,7 +22,9 @@
         "assets": [
           "apps/app/src/favicon.ico",
           "apps/app/src/assets",
-          "apps/app/src/manifest.webmanifest"
+          "apps/app/src/manifest.webmanifest",
+          "apps/app/src/combined-sw.js",
+          "apps/app/src/firebase-messaging-sw.js"
         ],
         "styles": [
           "@angular/material/prebuilt-themes/deeppurple-amber.css",

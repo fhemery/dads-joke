@@ -3,6 +3,9 @@
   <div class="title" routerLink="/">Dad's jokes</div>
   <div class="title" routerLink="/favorites">Favorites</div>
   <div class="placeholder">&nbsp;</div>
+  <div >
+    <button (click)="enableNotification()">Enable notifs !</button>
+  </div>
   <div *ngIf="(isLoggedIn$ | async) === false" class="login-button"><button mat-raised-button (click)="goToLogin()">Login</button></div>
   <div *ngIf="(isLoggedIn$ | async)" class="logged-in-bar">
     <div class="title" routerLink="/profile">Profile</div>

@@ -14,7 +14,12 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideHttpClient } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import {
+  enableIndexedDbPersistence,
+  getFirestore,
+  provideFirestore,
+} from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -23,15 +28,16 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       BrowserAnimationsModule,
       TranslateModule.forRoot(),
-      ServiceWorkerModule.register('ngsw-worker.js', {
+      ServiceWorkerModule.register('combined-sw.js', {
         enabled: !isDevMode(),
         // Register the ServiceWorker as soon as the application is stable
         // or after 30 seconds (whichever comes first).
         registrationStrategy: 'registerWhenStable:30000',
       }),
+      AngularFireModule.initializeApp(environment.firebase),
       provideFirebaseApp(() => initializeApp(environment.firebase)),
       provideAuth(() => getAuth()),
-      provideFirestore(() => getFirestore()),
+      provideFirestore(() => getFirestore(enableIndexedDbPersistence())),
       provideStorage(() => getStorage())
     ),
   ],
